@@ -43,6 +43,7 @@ const filterTransactions = curry(
     const isOfTxType = curry((filter: TransferType, tx) => {
       return propSatisfies(
         x =>
+          // @ts-ignore
           filter === '' ||
           // @ts-ignore
           (x && toUpper(x) === toUpper(filter)) ||

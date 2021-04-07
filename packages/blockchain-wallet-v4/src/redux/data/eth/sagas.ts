@@ -458,8 +458,7 @@ export default ({ api }) => {
             .split(' ')
         )
       )
-      // @ts-ignore
-      const txType = prop('type', tx)
+      const txType = prop<string, any>('type', tx)
       const negativeSignOrEmpty = equals('sent', txType) ? '-' : ''
       const priceAtTime = new BigNumber(
         // @ts-ignore

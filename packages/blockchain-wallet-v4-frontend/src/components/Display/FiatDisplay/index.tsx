@@ -19,6 +19,7 @@ class FiatDisplayContainer extends React.PureComponent<Props> {
       if (coin in FiatTypeEnum) {
         return
       }
+      // @ts-ignore
       if (includes(coin, erc20List)) {
         return this.props.ethActions.fetchErc20Rates(toLower(this.props.coin))
       }

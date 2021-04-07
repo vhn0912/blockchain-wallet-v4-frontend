@@ -28,6 +28,7 @@ class FeaturesContainer extends React.PureComponent<Props> {
     }
 
     // TODO: remove with send refactor 🙏
+    // @ts-ignore
     if (includes(coin, erc20List)) {
       return modalActions.showModal(`@MODAL.${type}.ETH` as ModalNamesType, {
         coin,

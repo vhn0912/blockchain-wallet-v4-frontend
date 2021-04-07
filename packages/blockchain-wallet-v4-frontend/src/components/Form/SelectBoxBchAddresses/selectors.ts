@@ -258,6 +258,7 @@ export const getData = (
       // @ts-ignore
       const data = reduce(concat, [], orderArray)
       if (includeAll) {
+        // @ts-ignore
         return { data: prepend(allWallets, data) }
       } else if (excludeHDWallets) {
         return { data: [allImportedAddresses] }

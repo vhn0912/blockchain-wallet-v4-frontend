@@ -42,17 +42,14 @@ export const ACCOUNT_NOT_FOUND = 'Not Found'
 export const TX_PER_PAGE = 10
 export const TX_REPORT_PAGE_SIZE = 50
 
-export const sumBigNumbers = reduce(
-  // @ts-ignore
-  (num1, num2) => new BigNumber.sum(num1, num2).toString(),
+export const sumBigNumbers = reduce<string, string>(
+  (num1, num2) => BigNumber.sum(num1, num2).toString(),
   '0'
 )
 
-const sumBalance = compose(
+const sumBalance = compose<any[], any[], any[], string>(
   sumBigNumbers,
-  // @ts-ignore
   map(account => account.map(S.selectBalanceFromAccount).getOrElse('0')),
-  // @ts-ignore
   values
 )
 
@@ -250,12 +247,10 @@ export default ({ api, networks }: { api: APIType; networks: any }) => {
             .split(' ')
         )
       )
-      // @ts-ignore
-      const txType = prop('type', tx)
-      const negativeSignOrEmpty = equals('sent', txType) ? '-' : ''
+      const txType = prop<string, any>('type', tx)
+      const negativeSignOrEmpty = equals<string>('sent', txType) ? '-' : ''
       const priceAtTime = new BigNumber(
-        // @ts-ignore
-        prop('price', nth(idx, historicalPrices))
+        prop<string, any>('price', nth(idx, historicalPrices))
       )
       const amountBig = new BigNumber(
         Exchange.convertXlmToXlm({
@@ -292,11 +287,9 @@ export default ({ api, networks }: { api: APIType; networks: any }) => {
     return unnest(
       map(tx => {
         const operations = decodeOperations(tx)
-        return compose(
-          // @ts-ignore
+        return compose<any[], any[], any[], any[]>(
           filter(prop('belongsToWallet')),
           map(transformTx(accounts, txNotes, tx)),
-          // @ts-ignore
           filter(isLumenOperation)
         )(operations)
       }, txList)

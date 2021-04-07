@@ -101,6 +101,7 @@ class DownloadTransactionsModal extends Component<Props, StateProps> {
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
   coinModel: selectors.core.walletOptions
     .getCoinModel(state, ownProps.coin)
+    // @ts-ignore
     .getOrElse({ coinTicker: 'ETH' }),
   formValues: selectors.form.getFormValues('transactionReport')(state),
   ...getData(state, ownProps.coin)

@@ -273,8 +273,14 @@ export default ({
           : convertStandardToBase(coin, values.amount)
       const inputCurrency = orderType === 'BUY' ? fiat : coin
       const outputCurrency = orderType === 'BUY' ? coin : fiat
-      const input = { amount, symbol: inputCurrency }
-      const output = { amount, symbol: outputCurrency }
+      const input: { amount?: string; symbol: typeof inputCurrency } = {
+        amount,
+        symbol: inputCurrency
+      }
+      const output: { amount?: string; symbol: typeof outputCurrency } = {
+        amount,
+        symbol: outputCurrency
+      }
 
       // used for sell only now, eventually buy as well
       // TODO: use swap2 quote for buy AND sell

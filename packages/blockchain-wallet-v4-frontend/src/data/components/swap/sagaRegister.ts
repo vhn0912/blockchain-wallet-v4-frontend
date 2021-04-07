@@ -30,7 +30,7 @@ export default ({ api, coreSagas, networks }) => {
     yield takeEvery(actionTypes.CHANGE, swapSagas.formChanged)
 
     yield takeLatest(AT.START_POLL_QUOTE, function * () {
-      if (pollTask && pollTask.isRunning) yield cancel(pollTask)
+      if (pollTask && pollTask.isRunning()) yield cancel(pollTask)
       pollTask = yield fork(swapSagas.fetchQuote)
       yield take(AT.STOP_POLL_QUOTE)
       yield cancel(pollTask)

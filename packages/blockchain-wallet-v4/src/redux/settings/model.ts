@@ -1,4 +1,4 @@
-import { InvitationsType } from '.'
+import { InvitationsType } from './types'
 
 export const DEFAULT_INVITATIONS: InvitationsType = {
   AAVE: true,

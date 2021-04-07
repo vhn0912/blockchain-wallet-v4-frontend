@@ -24,8 +24,10 @@ class ConfirmWords extends PureComponent<Props> {
       take(5),
       // @ts-ignore
       map(prop(1)),
+      // @ts-ignore
       randomize,
       pair
+      // @ts-ignore
     )(range(0, 12))
     /* eslint-disable */
     this.setState({ indexes })

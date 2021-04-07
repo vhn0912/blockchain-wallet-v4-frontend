@@ -50,7 +50,6 @@ class RegisterContainer extends React.PureComponent<PropsType, StateType> {
         isSimpleBuyGoal={isSimpleBuyGoal}
         initialValues={signupInitialValues}
         onSubmit={this.onSubmit}
-        password={password}
         passwordLength={passwordLength}
         showForm={this.state.showForm || showWalletFormQuery}
         toggleForm={this.toggleForm}

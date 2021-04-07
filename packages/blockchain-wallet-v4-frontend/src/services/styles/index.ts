@@ -1,3 +1,6 @@
+// @ts-nocheck
+// ts-nocheck because typescript 4 doesn't allow ts-ignore in template
+// literal strings below
 import { useEffect, useState } from 'react'
 import { mergeAll } from 'ramda'
 import { css } from 'styled-components'

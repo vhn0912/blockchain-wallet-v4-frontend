@@ -301,6 +301,7 @@ export default ({
               yield call(bitPayInvoiceEntered, payProInvoice)
               break
             default:
+              // @ts-ignore
               payment = yield payment.to(address, toType)
           }
           break

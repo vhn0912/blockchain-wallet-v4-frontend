@@ -74,7 +74,7 @@ export default () => {
         selectors.core.data.xlm.getTotalBalance
       )).getOrElse(0)
       const btcContext = yield select(selectors.core.wallet.getSpendableContext)
-      const btcBalance = reduce(
+      const btcBalance = reduce<any, number>(
         // @ts-ignore
         add,
         0,
@@ -89,7 +89,7 @@ export default () => {
       const bchContext = yield select(
         selectors.core.kvStore.bch.getSpendableContext
       )
-      const bchBalance = reduce(
+      const bchBalance = reduce<any, number>(
         // @ts-ignore
         add,
         0,

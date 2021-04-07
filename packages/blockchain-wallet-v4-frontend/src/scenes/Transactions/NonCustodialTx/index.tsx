@@ -41,6 +41,7 @@ class NonCustodialTxListItem extends React.PureComponent<Props> {
         this.props.xlmActions.setTxNotesXlm(transaction.hash, value)
         break
       }
+      // @ts-ignore
       case includes(coin, erc20List): {
         this.props.ethActions.setTxNotesErc20(coin, transaction.hash, value)
         break

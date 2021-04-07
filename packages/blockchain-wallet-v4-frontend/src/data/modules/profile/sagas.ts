@@ -369,11 +369,7 @@ export default ({ api, coreSagas, networks }) => {
       const tiersData = yield call(api.fetchTiers)
       yield put(
         A.fetchTiersSuccess(
-          compose(
-            tail,
-            // @ts-ignore
-            sortBy(prop('index'))
-          )(tiersData.tiers)
+          compose<any, any, any>(tail, sortBy(prop('index')))(tiersData.tiers)
         )
       )
     } catch (e) {
