@@ -132,7 +132,13 @@ export const reset2faFailure = (err: string): AuthNewActionTypes => ({
 })
 
 // WALLET RESTORE
-export const restore = (mnemonic, email, password, language, network) => ({
+export const restore = (
+  mnemonic: string,
+  email: string | undefined,
+  password: string,
+  language: string,
+  network: string | undefined
+): AuthNewActionTypes => ({
   type: AT.RESTORE,
   payload: { mnemonic, email, password, language, network }
 })
@@ -185,11 +191,11 @@ export const secureChannelLoginFailure = (err: string): AuthNewActionTypes => ({
 // MISC
 export const authenticate = () => ({ type: AT.AUTHENTICATE })
 export const deauthorizeBrowser = () => ({ type: AT.DEAUTHORIZE_BROWSER })
-export const setAuthType = authType => ({
+export const setAuthType = (authType: number): AuthNewActionTypes => ({
   type: AT.SET_AUTH_TYPE,
   payload: { authType }
 })
-export const setRegisterEmail = email => ({
+export const setRegisterEmail = (email: string): AuthNewActionTypes => ({
   type: AT.SET_REGISTER_EMAIL,
   payload: { email }
 })

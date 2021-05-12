@@ -101,6 +101,16 @@ interface Reset2faFailureActionType {
   type: typeof AT.RESET_2FA_FAILURE
 }
 
+interface RestoreActionType {
+  payload: {
+    email: string | undefined,
+    language: string,
+    mnemonic: string,
+    network: string | undefined,
+    password: string
+  }
+  type: typeof AT.RESTORE
+}
 interface Reset2faSuccessActionType {
   type: typeof AT.RESET_2FA_SUCCESS
 }
@@ -148,6 +158,20 @@ interface SecureChannelFailureActionType {
   type: typeof AT.SECURE_CHANNEL_LOGIN_FAILURE
 }
 
+interface SetAuthTypeActionType {
+  payload: {
+    authType: number
+  }
+  type: typeof AT.SET_AUTH_TYPE
+}
+
+interface SetRegisterEmailActionType {
+  payload: {
+    email: string
+  }
+  type: typeof AT.SET_REGISTER_EMAIL
+}
+
 export type AuthNewActionTypes =
   | InitializeLoginFailureActionType
   | InitializeLoginLoadingActionType
@@ -164,6 +188,7 @@ export type AuthNewActionTypes =
   | Reset2faLoadingActionType
   | Reset2faFailureActionType
   | Reset2faSuccessActionType
+  | RestoreActionType
   | RestoreFailureActionType
   | RestoreLoadingActionType
   | RestoreSuccessActionType
@@ -173,6 +198,8 @@ export type AuthNewActionTypes =
   | SecureChannelFailureActionType
   | SecureChannelLoadingActionType
   | SecureChannelSuccessActionType
+  | SetRegisterEmailActionType
+  | SetAuthTypeActionType
   | WalletGuidSubmitSuccessActionType
   | WalletGuidSubmitLoadingActionType
   | WalletGuidSubmitFailureActionType
