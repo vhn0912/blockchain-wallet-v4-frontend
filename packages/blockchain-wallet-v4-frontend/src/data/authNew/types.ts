@@ -63,10 +63,14 @@ interface WalletGuidSubmitFailureActionType {
   type: typeof AT.GUID_WALLET_FAILURE
 }
 interface LoginSuccessActionType {
+  payload: {}
   type: typeof AT.LOGIN_SUCCESS
 }
 
 interface LoginFailureActionType {
+  payload: {
+    err: string
+  }
   type: typeof AT.LOGIN_FAILURE
 }
 
@@ -91,6 +95,9 @@ interface Reset2faLoadingActionType {
 }
 
 interface Reset2faFailureActionType {
+  payload: {
+    err: string
+  }
   type: typeof AT.RESET_2FA_FAILURE
 }
 
@@ -115,10 +122,16 @@ interface RestoreFromMetadataLoadingActionType {
 }
 
 interface RestoreFromMetadataSuccessActionType {
+  payload: {
+    mnemonic: string
+  }
   type: typeof AT.RESTORE_FROM_METADATA_SUCCESS
 }
 
 interface RestoreFromMetadataFailureActionType {
+  payload: {
+    err: string
+  }
   type: typeof AT.RESTORE_FROM_METADATA_FAILURE
 }
 
@@ -129,6 +142,9 @@ interface SecureChannelSuccessActionType {
   type: typeof AT.SECURE_CHANNEL_LOGIN_SUCCESS
 }
 interface SecureChannelFailureActionType {
+  payload: {
+    err: string
+  }
   type: typeof AT.SECURE_CHANNEL_LOGIN_FAILURE
 }
 
