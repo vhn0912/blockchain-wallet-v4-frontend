@@ -1,3 +1,7 @@
+import { StringDecoder } from 'node:string_decoder'
+
+import { RemoteDataType } from 'blockchain-wallet-v4/src/types'
+
 import * as AT from './actionTypes'
 
 export enum LoginSteps {
@@ -17,12 +21,53 @@ export type LoginFormType = {
   step: LoginSteps
   twoFA?: number | string
 }
+// TODO: CHECK ON UNDEFINES
 
 export type LoginObject = {
   email: string
   email_code: string
   guid: string
   is_mobile_setup: string | boolean
+}
+
+export type RestoreWalletType = {
+  email: string | undefined
+  language: string
+  mnemonic: string
+  network?: string
+  password: string
+}
+
+export type LoginDataType = {
+  code?: string
+  guid: string
+  mobileLogin?: boolean
+  password: string
+  sharedKey?: string
+}
+
+export type Reset2faType = {
+  code: string
+  email: string
+  guid: string
+  message?: string
+  newEmail?: string
+  secretPhrase?: string
+  sessiontoken: StringDecoder
+}
+
+export type LoginState = {
+  auth_type: number
+  firstLogin: boolean,
+  isAuthenticated: boolean
+  isLoggingIn: boolean,
+  login: RemoteDataType<string, LoginDataType>,
+  metadataRestore: RemoteDataType<string, string>,
+  mobileLoginStarted: boolean,
+  registerEmail: string,
+  registering: RemoteDataType<string, RestoreWalletType>,
+  reset_2fa: RemoteDataType<string, Reset2faType>,
+  restoring: RemoteDataType<string, RestoreWalletType>
 }
 
 // actions
@@ -103,10 +148,10 @@ interface Reset2faFailureActionType {
 
 interface RestoreActionType {
   payload: {
-    email: string | undefined,
-    language: string,
-    mnemonic: string,
-    network: string | undefined,
+    email: string | undefined
+    language: string
+    mnemonic: string
+    network: string | undefined
     password: string
   }
   type: typeof AT.RESTORE
