@@ -8,11 +8,16 @@ const INITIAL_STATE: AuthState = {
   isLoggingIn: false,
   isAuthenticated: false,
   firstLogin: false,
+  login: Remote.NotAsked,
   metadataRestore: Remote.NotAsked,
   mobileLoginStarted: false,
-  login: Remote.NotAsked,
-  registerEmail: undefined
+  registerEmail: undefined,
+  reset_2fa: Remote.NotAsked,
+  restoring: Remote.NotAsked,
+  registering: Remote.NotAsked,
+  secureChannelLogin: Remote.NotAsked
 }
+
 
 export function AuthReducer(
   state = INITIAL_STATE,
@@ -31,12 +36,12 @@ export function AuthReducer(
         login: Remote.Loading
       }
     }
-    //   case AT.LOGIN_SUCCESS: {
-    //     return {
-    //       ...state,
-    //       login: Remote.Success(action.payload)
-    //   }
-    // }
+      case AT.LOGIN_SUCCESS: {
+        return {
+          ...state,
+          login: Remote.Success(action.payload)
+      }
+    }
     case AT.LOGIN_FAILURE: {
       return {
         ...state,

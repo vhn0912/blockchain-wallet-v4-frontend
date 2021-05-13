@@ -69,10 +69,14 @@ export type AuthState = {
   firstLogin: boolean
   isAuthenticated: boolean
   isLoggingIn: boolean
-  login: RemoteDataType<string, LoginObject>
+  login: RemoteDataType<string, any>
   metadataRestore: RemoteDataType<string, string>
   mobileLoginStarted: boolean
   registerEmail?: string
+  reset_2fa: RemoteDataType<string, any>
+  restoring:RemoteDataType<string,any>
+  registering: RemoteDataType<string, any>
+  secureChannelLogin: RemoteDataType<string,any>
 }
 
 // actions
@@ -134,6 +138,10 @@ interface MobileLoginStartActionType {
 
 interface MobileLoginFinishActionType {
   type: typeof AT.MOBILE_LOGIN_FINISH
+}
+
+interface RegisterActionType {
+  type: typeof AT.REGISTER
 }
 
 interface RegisterSuccessActionType {
