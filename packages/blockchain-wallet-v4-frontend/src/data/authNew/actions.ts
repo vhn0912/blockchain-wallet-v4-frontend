@@ -60,9 +60,9 @@ export const login = (guid, password, code, sharedKey, mobileLogin) => ({
 export const loginLoading = (): AuthNewActionTypes => ({
   type: AT.LOGIN_LOADING
 })
-export const loginSuccess = (): AuthNewActionTypes => ({
+export const loginSuccess = (data): AuthNewActionTypes => ({
   type: AT.LOGIN_SUCCESS,
-  payload: {}
+  payload: { data }
 })
 export const loginFailure = (err: string): AuthNewActionTypes => ({
   type: AT.LOGIN_FAILURE,

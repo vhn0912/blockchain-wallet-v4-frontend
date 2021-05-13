@@ -56,22 +56,30 @@ export type Reset2faType = {
   sessiontoken: StringDecoder
 }
 
-export type LoginState = {
+export type RegisterType = {
+  email: string
+  language: string
+  password: string
+}
+
+// state
+
+export type AuthState = {
   auth_type: number
-  firstLogin: boolean,
+  firstLogin: boolean
   isAuthenticated: boolean
-  isLoggingIn: boolean,
-  login: RemoteDataType<string, LoginDataType>,
-  metadataRestore: RemoteDataType<string, string>,
-  mobileLoginStarted: boolean,
-  registerEmail: string,
-  registering: RemoteDataType<string, RestoreWalletType>,
-  reset_2fa: RemoteDataType<string, Reset2faType>,
-  restoring: RemoteDataType<string, RestoreWalletType>
+  isLoggingIn: boolean
+  login: RemoteDataType<string, LoginObject>
+  metadataRestore: RemoteDataType<string, string>
+  mobileLoginStarted: boolean
+  registerEmail?: string
 }
 
 // actions
 
+interface AuthenticateActionType {
+  type: typeof AT.AUTHENTICATE
+}
 interface InitalizeLoginSuccessActionType {
   type: typeof AT.INTIALIZE_LOGIN_SUCCESS
 }
@@ -96,19 +104,16 @@ interface LoginGuidFailureActionType {
   type: typeof AT.LOGIN_GUID_FAILURE
 }
 
-interface WalletGuidSubmitSuccessActionType {
-  type: typeof AT.GUID_WALLET_SUCCESS
-}
-
-interface WalletGuidSubmitLoadingActionType {
-  type: typeof AT.GUID_WALLET_LOADING
-}
-
-interface WalletGuidSubmitFailureActionType {
-  type: typeof AT.GUID_WALLET_FAILURE
+interface LoginActionType {
+  payload: {
+    email: string
+  }
+  type: typeof AT.LOGIN
 }
 interface LoginSuccessActionType {
-  payload: {}
+  payload: {
+    data: LoginObject
+  }
   type: typeof AT.LOGIN_SUCCESS
 }
 
@@ -121,6 +126,14 @@ interface LoginFailureActionType {
 
 interface LoginLoadingActionType {
   type: typeof AT.LOGIN_LOADING
+}
+
+interface MobileLoginStartActionType {
+  type: typeof AT.MOBILE_LOGIN_START
+}
+
+interface MobileLoginFinishActionType {
+  type: typeof AT.MOBILE_LOGIN_FINISH
 }
 
 interface RegisterSuccessActionType {
@@ -210,23 +223,44 @@ interface SetAuthTypeActionType {
   type: typeof AT.SET_AUTH_TYPE
 }
 
+interface SetFirstLoginActionType {
+  payload: {
+    firstLogin: boolean
+  }
+  type: typeof AT.SET_FIRST_LOGIN
+}
+
 interface SetRegisterEmailActionType {
   payload: {
     email: string
   }
   type: typeof AT.SET_REGISTER_EMAIL
 }
+interface WalletGuidSubmitSuccessActionType {
+  type: typeof AT.GUID_WALLET_SUCCESS
+}
 
+interface WalletGuidSubmitLoadingActionType {
+  type: typeof AT.GUID_WALLET_LOADING
+}
+
+interface WalletGuidSubmitFailureActionType {
+  type: typeof AT.GUID_WALLET_FAILURE
+}
 export type AuthNewActionTypes =
+  | AuthenticateActionType
   | InitializeLoginFailureActionType
   | InitializeLoginLoadingActionType
   | InitalizeLoginSuccessActionType
   | LoginGuidFailureActionType
   | LoginGuidLoadingActionType
   | LoginGuidSuccessActionType
+  | LoginActionType
   | LoginFailureActionType
   | LoginLoadingActionType
   | LoginSuccessActionType
+  | MobileLoginStartActionType
+  | MobileLoginFinishActionType
   | RegisterLoadingActionType
   | RegisterFailureActionType
   | RegisterSuccessActionType
@@ -243,6 +277,7 @@ export type AuthNewActionTypes =
   | SecureChannelFailureActionType
   | SecureChannelLoadingActionType
   | SecureChannelSuccessActionType
+  | SetFirstLoginActionType
   | SetRegisterEmailActionType
   | SetAuthTypeActionType
   | WalletGuidSubmitSuccessActionType
